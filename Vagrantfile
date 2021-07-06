@@ -8,7 +8,7 @@ config.vm.network :private_network, ip: '192.168.50.10'
 config.vm.provider :virtualbox do |vb|
 vb.gui = false
 vb.cpus = 4
-vb.memory = 8192
+vb.memory = 4096
 vb.customize ['modifyvm', :id, '--natdnsproxy1', 'off']
 vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'off']
 end
@@ -29,6 +29,10 @@ config.vm.synced_folder './', '/home/vagrant/app', type: "rsync",
 
   curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
+
+  # makeコマンドインストール
+  sudo apt install -y build-essential
+
 # 監視数上限up
   sudo sh -c 'echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf' && sudo sysctl -p
   fs.inotify.max_user_watches = 524288
